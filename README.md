@@ -18,6 +18,10 @@ A machine learning web application that predicts the most suitable crop based on
 - HTML
 - CSS
 
+# Demo Video
+
+[Watch Demo on YouTube](https://youtu.be/z-CKW1FL1Xw)
+
 # Input Parameters
 
 - Nitrogen
