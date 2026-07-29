@@ -176,7 +176,7 @@ crop-prediction
 
 ## Demo Video
 
-Watch Demo on YouTube
+https://youtu.be/z-CKW1FL1Xw
 
 ---
 
