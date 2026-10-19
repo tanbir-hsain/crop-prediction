@@ -281,6 +281,14 @@ The workflow helps detect basic Python syntax errors and dependency installation
 
 ---
 
+## Demo Video
+
+Watch the Crop Prediction application demo:
+
+[**Crop Prediction — Watch Demo on YouTube**](https://www.youtube.com/watch?v=z-CKW1FL1Xw)
+
+---
+
 ## Author
 
 **Tanbir Hussain**
@@ -290,3 +298,5 @@ https://github.com/tanbir-hsain
 
 LinkedIn:
 https://www.linkedin.com/in/tanbir-hussain-76320b414
+
+
