@@ -1,27 +1,28 @@
-# Crop Prediction System
+# Crop Prediction
 
 ## Project Description
 
-Crop Prediction System built using Python, Flask, and Machine Learning to recommend the most suitable crop based on soil and environmental conditions.
+Crop Prediction is a machine learning web application built with Python and Flask that predicts a suitable crop based on agricultural and farming-related input data.
 
-The application allows users to enter farming details such as soil nutrients, temperature, humidity, rainfall, land area, and number of workers. A trained Decision Tree model predicts the suitable crop and also estimates farming cost and expected profit.
+The application uses a Decision Tree Classification model trained on a dataset containing soil nutrients, weather conditions, farming area, and number of workers. Users can enter these values through a web interface to receive a predicted crop along with estimated farming cost and profit.
 
-This project demonstrates Machine Learning model training, Flask web development, and deployment on AWS EC2.
+This project demonstrates Machine Learning, Python Programming, Data Processing, Web Application Development, Model Training, and GitHub Actions (CI).
 
 ---
 
 ## Tech Stack
 
-- Python
-- Flask
-- Machine Learning
-- Scikit-learn
-- Pandas
-- Joblib
-- HTML
-- CSS
-- AWS EC2
-- Git & GitHub
+* Python
+* Flask
+* Pandas
+* Scikit-learn
+* Joblib
+* HTML
+* CSS
+* Machine Learning
+* Git
+* GitHub
+* GitHub Actions (CI)
 
 ---
 
@@ -30,153 +31,253 @@ This project demonstrates Machine Learning model training, Flask web development
 ```text
 User
    ↓
+Web Interface (HTML & CSS)
+   ↓
 Flask Web Application
    ↓
-User Input
+User Input Processing
    ↓
-Decision Tree Model
+Trained Decision Tree Model
    ↓
-Crop Prediction
+Predicted Crop
    ↓
-Cost & Profit Estimation
+Estimated Farming Cost & Profit
    ↓
-Prediction Result
+Results Displayed to User
 ```
 
 ---
 
 ## Features
 
-- Crop recommendation using Machine Learning
-- User-friendly Flask web interface
-- Decision Tree prediction model
-- Farming cost estimation
-- Expected profit estimation
-- AWS EC2 deployment
+* Crop prediction using machine learning
+* Eight agricultural and farming-related input features
+* Support for Rice, Wheat, Maize, Cotton, and Millet, along with Sugarcane
+* Decision Tree Classification model
+* Model training and evaluation using Scikit-learn
+* Model persistence using Joblib
+* Flask-based web interface
+* Estimated farming cost based on the entered area
+* Estimated profit based on the entered area
+* Automated Python syntax checks using GitHub Actions
 
 ---
 
 ## Project Workflow
 
-1. User enters farming details.
-2. Flask receives the input values.
-3. Input is sent to the trained Decision Tree model.
-4. The model predicts the most suitable crop.
-5. Farming cost and expected profit are calculated.
-6. The prediction is displayed on the webpage.
+1. The user opens the Crop Prediction web application.
+2. The user enters nitrogen, phosphorus, potassium, temperature, humidity, rainfall, farming area, and number of workers.
+3. Flask receives the submitted form data.
+4. The application converts the input values into numeric features.
+5. The trained Decision Tree model predicts a crop.
+6. The application calculates estimated farming cost and profit.
+7. Flask sends the results back to the web page.
+8. The predicted crop and estimates are displayed to the user.
 
 ---
 
 ## Machine Learning Model
 
-### Dataset
-
-- crop_data.csv
-
 ### Algorithm
 
-- Decision Tree Classifier
+* Decision Tree Classifier
 
-### Libraries
+### Dataset
 
-- Scikit-learn
-- Pandas
-- Joblib
+The model is trained using `crop_data.csv`, which contains agricultural input features and their corresponding crop labels.
+
+### Input Features
+
+| Feature     | Description                      |
+| ----------- | -------------------------------- |
+| Nitrogen    | Nitrogen value                   |
+| Phosphorus  | Phosphorus value                 |
+| Potassium   | Potassium value                  |
+| Temperature | Temperature value                |
+| Humidity    | Humidity value                   |
+| Rainfall    | Rainfall value                   |
+| Area        | Farming area entered by the user |
+| Workers     | Number of workers                |
+
+### Target Variable
+
+The target column is `crop`, which contains the crop label predicted by the model.
+
+The dataset includes six crop categories:
+
+* Rice
+* Wheat
+* Maize
+* Cotton
+* Millet
+* Sugarcane
+
+### Model Training
+
+The `train.py` script performs the following operations:
+
+1. Loads the dataset using Pandas.
+2. Separates input features from the target column.
+3. Splits the dataset into training and testing sets using an 80:20 ratio.
+4. Trains a Decision Tree Classifier.
+5. Evaluates the model using accuracy score.
+6. Saves the trained model as `model.pkl` using Joblib.
+
+The model uses a fixed random state of `42` to make the train-test split and classifier setup reproducible.
+
+### Model Evaluation
+
+The model prints its test-set accuracy during training. The actual accuracy depends on the dataset and train-test split.
+
+Because the current dataset contains only 24 rows, the evaluation result should be treated as an initial demonstration rather than evidence of reliable real-world prediction performance.
 
 ---
 
-## Input Parameters
+## Cost and Profit Estimation
 
-- Nitrogen
-- Phosphorus
-- Potassium
-- Temperature
-- Humidity
-- Rainfall
-- Area
-- Workers
+The application calculates two estimates using the farming area entered by the user.
 
----
+### Estimated Farming Cost
 
-## Output
-
-- Recommended Crop
-- Estimated Farming Cost
-- Estimated Profit
-
----
-
-## Installation
-
-Clone the repository
-
-```bash
-git clone https://github.com/tanbir-hsain/crop-prediction.git
+```python
+cost = int(area * 15000)
 ```
 
-Move into the project
+### Estimated Profit
 
-```bash
-cd crop-prediction
+```python
+profit = int(area * 10000)
 ```
 
-Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Run the application
-
-```bash
-python app.py
-```
+These are fixed formula-based estimates implemented in `app.py`. They are not predictions generated by the machine learning model and should not be interpreted as actual financial forecasts.
 
 ---
 
 ## Project Structure
 
 ```text
-crop-prediction
+crop-prediction/
+│
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+│
+├── static/
+│   └── style.css
+│
+├── templates/
+│   └── index.html
 │
 ├── app.py
 ├── train.py
-├── model.pkl
 ├── crop_data.csv
+├── model.pkl
 ├── requirements.txt
-├── templates/
-├── static/
-└── .gitignore
+├── .gitignore
+└── README.md
 ```
+
+The `model.pkl` file is generated by running `train.py`. The structure above represents the intended project layout; keep only the files that actually exist in your repository.
+
+---
+
+## Screenshots
+
+### Application Interface
+
+![Crop Prediction Application](screenshot/app-ui.png)
+
+---
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone YOUR_REPOSITORY_URL
+cd crop-prediction
+```
+
+Replace `YOUR_REPOSITORY_URL` with the actual GitHub repository URL.
+
+### 2. Create a Virtual Environment
+
+```bash
+python -m venv .venv
+```
+
+### 3. Activate the Virtual Environment
+
+For Windows PowerShell:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+### 4. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 5. Train the Model
+
+```bash
+python train.py
+```
+
+This trains the Decision Tree model, prints its accuracy, and saves the model as `model.pkl`.
+
+### 6. Run the Application
+
+```bash
+python app.py
+```
+
+Open the local address shown by Flask in your browser. By default, this application is configured to use port `5000`.
+
+---
+
+## GitHub Actions CI
+
+This project uses GitHub Actions for Continuous Integration (CI).
+
+The workflow runs automatically when code is pushed or a pull request is opened.
+
+### Automated Checks
+
+* Install Python dependencies from `requirements.txt`.
+* Check Python syntax in `app.py` and `train.py`.
+
+The workflow helps detect basic Python syntax errors and dependency installation issues before changes are integrated.
 
 ---
 
 ## Skills Demonstrated
 
-- Python Programming
-- Flask Development
-- Machine Learning
-- Decision Tree Classifier
-- Model Training
-- Web Application Development
-- AWS EC2 Deployment
-- Git & GitHub
+* Python Programming
+* Machine Learning Fundamentals
+* Decision Tree Classification
+* Data Processing with Pandas
+* Model Evaluation using Accuracy Score
+* Model Persistence with Joblib
+* Flask Web Application Development
+* HTML and CSS
+* Git and GitHub
+* GitHub Actions
+* Continuous Integration (CI)
 
 ---
 
 ## Future Improvements
 
-- Use larger datasets for improved prediction accuracy.
-- Add fertilizer recommendations.
-- Add weather API integration.
-- Support multiple regional languages.
-- Deploy using a custom domain.
-
----
-
-## Demo Video
-
-https://youtu.be/z-CKW1FL1Xw
+* Expand the dataset with more representative agricultural records.
+* Evaluate the model using additional metrics and cross-validation.
+* Add input validation and user-friendly error handling.
+* Improve prediction reliability using more representative training data.
+* Replace fixed cost and profit formulas with realistic, data-supported estimates.
+* Add automated unit and integration tests.
+* Deploy the application to a cloud platform.
 
 ---
 
@@ -184,8 +285,8 @@ https://youtu.be/z-CKW1FL1Xw
 
 **Tanbir Hussain**
 
-GitHub  
+GitHub:
 https://github.com/tanbir-hsain
 
-LinkedIn  
+LinkedIn:
 https://www.linkedin.com/in/tanbir-hussain-76320b414
